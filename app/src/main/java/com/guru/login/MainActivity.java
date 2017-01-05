@@ -11,6 +11,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -53,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
     public static final int READ_TIMEOUT = 15000;
     private EditText etEmail;
     private EditText etPassword;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
         // 名稱為email的元件
         etPassword = (EditText) findViewById(R.id.password);
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     //Trggers when LOGIN Button clicked
@@ -94,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
             new AsyncLogin().execute(email, password);
         }
     }
+
     //validating email id
     //規定email的格式並驗證輸入的email是否符合要求
     private boolean isValidEmail(String email) {
@@ -115,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-
     private class AsyncLogin extends AsyncTask<String, String, String> {
         ProgressDialog pdLoading = new ProgressDialog(MainActivity.this);
         HttpURLConnection conn;
@@ -132,11 +145,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(String...params) {
+        protected String doInBackground(String... params) {
             //Enter URL address where your php file resides
             //輸入你的PHP檔案位置的URL門號
             try {
                 url = new URL("http://10.2.1.132/login.inc.php");
+                //10.2.1.132 iii
+                //192.168.43.144 home
             } catch (MalformedURLException e) {
                 Log.v("mary", e.toString());
                 return "exception e";
@@ -243,12 +258,12 @@ and logout button to clear sharedPreferences.
                 Toast.makeText(MainActivity.this, "電子郵件或密碼錯誤" +
                         "!", Toast.LENGTH_LONG).show();
             } else if (result.equalsIgnoreCase("exception")
-                || result.equalsIgnoreCase("unsuccessful")){
+                    || result.equalsIgnoreCase("unsuccessful")) {
 
                 Toast.makeText(MainActivity.this, "錯誤!" +
-                        "連線有問題"
-                , Toast.LENGTH_LONG).show();
+                                "連線有問題"
+                        , Toast.LENGTH_LONG).show();
             }
-         }
+        }
     }
 }

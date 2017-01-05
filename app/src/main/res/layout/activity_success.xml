@@ -11,7 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="WELCOME"
+        android:text="歡迎光臨 - 自行車線上競速"
+        android:textSize="25sp"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -21,7 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="Successfully LoggedIn"
+        android:text="登入成功!"
+        android:textSize="25sp"
         android:id="@+id/textView2"
         android:layout_marginTop="46dp"
         android:layout_below="@+id/textView"
